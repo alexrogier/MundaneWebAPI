@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="mundanedbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="itemid" />
+          </Key>
+          <Property Name="itemid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="worth" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="bmagical" Type="bit" Nullable="false" />
+          <Property Name="bfood" Type="bit" Nullable="false" />
+          <Property Name="bequipment" Type="bit" Nullable="false" />
+          <Property Name="btool" Type="bit" Nullable="false" />
+          <Property Name="bpotion" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="GetAllItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumResults" Type="int" Mode="In" />
+          <Parameter Name="bEnableMagicalItems" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="mundanedbModelStoreContainer">
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mundanedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="itemid" />
+          </Key>
+          <Property Name="itemid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="worth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="bmagical" Type="Boolean" Nullable="false" />
+          <Property Name="bfood" Type="Boolean" Nullable="false" />
+          <Property Name="bequipment" Type="Boolean" Nullable="false" />
+          <Property Name="btool" Type="Boolean" Nullable="false" />
+          <Property Name="bpotion" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="mundanedbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Items" EntityType="Self.Items" />
+          <FunctionImport Name="GetAllItems" ReturnType="Collection(mundanedbModel.GetAllItems_Result)">
+          <Parameter Name="NumResults" Mode="In" Type="Int32" />
+            <Parameter Name="bEnableMagicalItems" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllItems_Result">
+          <Property Type="Int32" Name="itemid" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="worth" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="bmagical" Nullable="false" />
+          <Property Type="Boolean" Name="bfood" Nullable="false" />
+          <Property Type="Boolean" Name="bequipment" Nullable="false" />
+          <Property Type="Boolean" Name="btool" Nullable="false" />
+          <Property Type="Boolean" Name="bpotion" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="mundanedbModelStoreContainer" CdmEntityContainer="mundanedbEntities">
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="mundanedbModel.Items">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="itemid" ColumnName="itemid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="worth" ColumnName="worth" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="bmagical" ColumnName="bmagical" />
+                <ScalarProperty Name="bfood" ColumnName="bfood" />
+                <ScalarProperty Name="bequipment" ColumnName="bequipment" />
+                <ScalarProperty Name="btool" ColumnName="btool" />
+                <ScalarProperty Name="bpotion" ColumnName="bpotion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllItems" FunctionName="mundanedbModel.Store.GetAllItems">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="mundanedbModel.GetAllItems_Result">
+                <ScalarProperty Name="itemid" ColumnName="itemid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="worth" ColumnName="worth" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="bmagical" ColumnName="bmagical" />
+                <ScalarProperty Name="bfood" ColumnName="bfood" />
+                <ScalarProperty Name="bequipment" ColumnName="bequipment" />
+                <ScalarProperty Name="btool" ColumnName="btool" />
+                <ScalarProperty Name="bpotion" ColumnName="bpotion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
