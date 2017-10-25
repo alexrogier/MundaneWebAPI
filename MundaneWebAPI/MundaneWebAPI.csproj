@@ -108,6 +108,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenerateLoot_Result.cs">
+      <DependentUpon>mundaneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetAllItems_Result.cs">
       <DependentUpon>mundaneModel.tt</DependentUpon>
     </Compile>
