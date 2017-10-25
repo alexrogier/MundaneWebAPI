@@ -34,8 +34,12 @@ namespace MundaneWebAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItems_Result>("GetAllItems");
         }
     
-        public virtual ObjectResult<GenerateLoot_Result> GenerateLoot(Nullable<int> numResults, Nullable<bool> bEnableMagicalItems)
+        public virtual ObjectResult<GenerateLoot_Result> GenerateLoot(string lootType, Nullable<int> numResults, Nullable<bool> bEnableMagicalItems)
         {
+            var lootTypeParameter = lootType != null ?
+                new ObjectParameter("LootType", lootType) :
+                new ObjectParameter("LootType", typeof(string));
+    
             var numResultsParameter = numResults.HasValue ?
                 new ObjectParameter("NumResults", numResults) :
                 new ObjectParameter("NumResults", typeof(int));
@@ -44,7 +48,7 @@ namespace MundaneWebAPI.Models
                 new ObjectParameter("bEnableMagicalItems", bEnableMagicalItems) :
                 new ObjectParameter("bEnableMagicalItems", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateLoot_Result>("GenerateLoot", numResultsParameter, bEnableMagicalItemsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateLoot_Result>("GenerateLoot", lootTypeParameter, numResultsParameter, bEnableMagicalItemsParameter);
         }
     }
 }

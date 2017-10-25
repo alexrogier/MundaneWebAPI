@@ -13,9 +13,9 @@ namespace MundaneWebAPI.Controllers
         mundanedbEntities ctx = new mundanedbEntities();
         
         [HttpGet]
-        public IEnumerable<GenerateLoot_Result> GenerateLoot(int numResults, bool bEnableMagicalItems)
+        public IEnumerable<GenerateLoot_Result> GenerateLoot(string lootType, int numResults, bool bEnableMagicalItems)
         {
-            return ctx.GenerateLoot(numResults, bEnableMagicalItems).ToList();
+            return ctx.GenerateLoot(lootType, numResults, bEnableMagicalItems).ToList();
         }
         public IEnumerable<GetAllItems_Result> GetAllItems()
         {
