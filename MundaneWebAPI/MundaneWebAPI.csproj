@@ -90,15 +90,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Models\mundaneModel.Context.tt">
+    <Content Include="Models\MundaneModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mundaneModel.edmx</DependentUpon>
-      <LastGenOutput>mundaneModel.Context.cs</LastGenOutput>
+      <DependentUpon>MundaneModel.edmx</DependentUpon>
+      <LastGenOutput>MundaneModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\mundaneModel.tt">
+    <Content Include="Models\MundaneModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mundaneModel.edmx</DependentUpon>
-      <LastGenOutput>mundaneModel.cs</LastGenOutput>
+      <DependentUpon>MundaneModel.edmx</DependentUpon>
+      <LastGenOutput>MundaneModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
@@ -109,40 +109,41 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\GenerateLoot_Result.cs">
-      <DependentUpon>mundaneModel.tt</DependentUpon>
+      <DependentUpon>MundaneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetAllItems_Result.cs">
-      <DependentUpon>mundaneModel.tt</DependentUpon>
+      <DependentUpon>MundaneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Items.cs">
-      <DependentUpon>mundaneModel.tt</DependentUpon>
+      <DependentUpon>MundaneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\mundaneModel.Context.cs">
+    <Compile Include="Models\MundaneModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mundaneModel.Context.tt</DependentUpon>
+      <DependentUpon>MundaneModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\mundaneModel.cs">
+    <Compile Include="Models\MundaneModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mundaneModel.tt</DependentUpon>
+      <DependentUpon>MundaneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\mundaneModel.Designer.cs">
+    <Compile Include="Models\MundaneModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mundaneModel.edmx</DependentUpon>
+      <DependentUpon>MundaneModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\mundaneModel.edmx">
+    <EntityDeploy Include="Models\MundaneModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>mundaneModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MundaneModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\mundaneModel.edmx.diagram">
-      <DependentUpon>mundaneModel.edmx</DependentUpon>
+    <Content Include="Models\MundaneModel.edmx.diagram">
+      <DependentUpon>MundaneModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
