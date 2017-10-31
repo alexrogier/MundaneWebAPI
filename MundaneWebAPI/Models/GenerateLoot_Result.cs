@@ -22,6 +22,7 @@ namespace MundaneWebAPI.Models
         public Nullable<bool> bequipment { get; set; }
         public Nullable<bool> btool { get; set; }
         public Nullable<bool> bpotion { get; set; }
+        public Nullable<bool> btradegood { get; set; }
         public Nullable<int> rarity { get; set; }
     }
 }

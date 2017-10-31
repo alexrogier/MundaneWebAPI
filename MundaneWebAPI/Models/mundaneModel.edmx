@@ -18,7 +18,8 @@
           <Property Name="bequipment" Type="bit" Nullable="false" />
           <Property Name="btool" Type="bit" Nullable="false" />
           <Property Name="bpotion" Type="bit" Nullable="false" />
-          <Property Name="rarity" Type="int" />
+          <Property Name="btradegood" Type="bit" Nullable="false" />
+          <Property Name="rarity" Type="int" Nullable="false" />
         </EntityType>
         <Function Name="GenerateLoot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LootType" Type="nvarchar" Mode="In" />
@@ -49,7 +50,8 @@
           <Property Name="bequipment" Type="Boolean" Nullable="false" />
           <Property Name="btool" Type="Boolean" Nullable="false" />
           <Property Name="bpotion" Type="Boolean" Nullable="false" />
-          <Property Name="rarity" Type="Int32" />
+          <Property Name="btradegood" Type="Boolean" Nullable="false" />
+          <Property Name="rarity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="mundanedbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Items" EntityType="Self.Items" />
@@ -72,6 +74,7 @@
           <Property Type="Boolean" Name="bequipment" Nullable="true" />
           <Property Type="Boolean" Name="btool" Nullable="true" />
           <Property Type="Boolean" Name="bpotion" Nullable="true" />
+          <Property Type="Boolean" Name="btradegood" Nullable="true" />
           <Property Type="Int32" Name="rarity" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetAllItems_Result">
@@ -84,7 +87,8 @@
           <Property Type="Boolean" Name="bequipment" Nullable="false" />
           <Property Type="Boolean" Name="btool" Nullable="false" />
           <Property Type="Boolean" Name="bpotion" Nullable="false" />
-          <Property Type="Int32" Name="rarity" Nullable="true" />
+          <Property Type="Boolean" Name="btradegood" Nullable="false" />
+          <Property Type="Int32" Name="rarity" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -104,6 +108,7 @@
                 <ScalarProperty Name="bequipment" ColumnName="bequipment" />
                 <ScalarProperty Name="btool" ColumnName="btool" />
                 <ScalarProperty Name="bpotion" ColumnName="bpotion" />
+                <ScalarProperty Name="btradegood" ColumnName="btradegood" />
                 <ScalarProperty Name="rarity" ColumnName="rarity" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -120,6 +125,7 @@
                 <ScalarProperty Name="bequipment" ColumnName="bequipment" />
                 <ScalarProperty Name="btool" ColumnName="btool" />
                 <ScalarProperty Name="bpotion" ColumnName="bpotion" />
+                <ScalarProperty Name="btradegood" ColumnName="btradegood" />
                 <ScalarProperty Name="rarity" ColumnName="rarity" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -136,6 +142,7 @@
                 <ScalarProperty Name="bequipment" ColumnName="bequipment" />
                 <ScalarProperty Name="btool" ColumnName="btool" />
                 <ScalarProperty Name="bpotion" ColumnName="bpotion" />
+                <ScalarProperty Name="btradegood" ColumnName="btradegood" />
                 <ScalarProperty Name="rarity" ColumnName="rarity" />
               </ComplexTypeMapping>
             </ResultMapping>
