@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
+    <ProductVersion> 
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9DF95A6F-88DA-4B4C-8DC8-48233773FC2C}</ProjectGuid>
@@ -143,6 +143,8 @@
       <DependentUpon>mundaneModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\mundane - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mundane - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
