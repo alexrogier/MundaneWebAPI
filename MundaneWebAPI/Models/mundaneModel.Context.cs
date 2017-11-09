@@ -58,5 +58,14 @@ namespace MundaneWebAPI.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItems_Result>("GetAllItems");
         }
+    
+        public virtual ObjectResult<GetItemByID_Result> GetItemByID(Nullable<int> itemID)
+        {
+            var itemIDParameter = itemID.HasValue ?
+                new ObjectParameter("ItemID", itemID) :
+                new ObjectParameter("ItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetItemByID_Result>("GetItemByID", itemIDParameter);
+        }
     }
 }
