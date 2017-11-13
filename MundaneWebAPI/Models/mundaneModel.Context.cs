@@ -29,12 +29,7 @@ namespace MundaneWebAPI.Models
     
         public virtual DbSet<Items> Items { get; set; }
     
-        public virtual ObjectResult<GetAllItems_Result> GetAllItems()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItems_Result>("GetAllItems");
-        }
-    
-        public virtual ObjectResult<GenerateLoot_Result> GenerateLoot(string lootType, Nullable<int> numResults, Nullable<bool> bEnableMagicalItems)
+        public virtual ObjectResult<GenerateLoot_Result> GenerateLoot(string lootType, Nullable<int> numResults, Nullable<bool> bEnableMagicalItems, Nullable<int> uncommonChance, Nullable<int> rareChance)
         {
             var lootTypeParameter = lootType != null ?
                 new ObjectParameter("LootType", lootType) :
@@ -48,7 +43,29 @@ namespace MundaneWebAPI.Models
                 new ObjectParameter("bEnableMagicalItems", bEnableMagicalItems) :
                 new ObjectParameter("bEnableMagicalItems", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateLoot_Result>("GenerateLoot", lootTypeParameter, numResultsParameter, bEnableMagicalItemsParameter);
+            var uncommonChanceParameter = uncommonChance.HasValue ?
+                new ObjectParameter("UncommonChance", uncommonChance) :
+                new ObjectParameter("UncommonChance", typeof(int));
+    
+            var rareChanceParameter = rareChance.HasValue ?
+                new ObjectParameter("RareChance", rareChance) :
+                new ObjectParameter("RareChance", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GenerateLoot_Result>("GenerateLoot", lootTypeParameter, numResultsParameter, bEnableMagicalItemsParameter, uncommonChanceParameter, rareChanceParameter);
+        }
+    
+        public virtual ObjectResult<GetAllItems_Result> GetAllItems()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItems_Result>("GetAllItems");
+        }
+    
+        public virtual ObjectResult<GetItemByID_Result> GetItemByID(Nullable<int> itemID)
+        {
+            var itemIDParameter = itemID.HasValue ?
+                new ObjectParameter("ItemID", itemID) :
+                new ObjectParameter("ItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetItemByID_Result>("GetItemByID", itemIDParameter);
         }
     }
 }

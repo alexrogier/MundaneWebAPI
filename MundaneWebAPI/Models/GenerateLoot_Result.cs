@@ -13,14 +13,16 @@ namespace MundaneWebAPI.Models
     
     public partial class GenerateLoot_Result
     {
-        public int itemid { get; set; }
+        public Nullable<int> itemid { get; set; }
         public string name { get; set; }
         public string worth { get; set; }
         public string description { get; set; }
-        public bool bmagical { get; set; }
-        public bool bfood { get; set; }
-        public bool bequipment { get; set; }
-        public bool btool { get; set; }
-        public bool bpotion { get; set; }
+        public Nullable<bool> bmagical { get; set; }
+        public Nullable<bool> bfood { get; set; }
+        public Nullable<bool> bequipment { get; set; }
+        public Nullable<bool> btool { get; set; }
+        public Nullable<bool> bpotion { get; set; }
+        public Nullable<bool> btradegood { get; set; }
+        public Nullable<int> rarity { get; set; }
     }
 }

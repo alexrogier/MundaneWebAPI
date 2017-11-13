@@ -1,0 +1,77 @@
+﻿USE [mundanedb]
+GO
+/****** Object:  StoredProcedure [dbo].[GenerateLoot]    Script Date: 10/31/2017 11:00:24 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GenerateLoot]
+	@LootType nvarchar(255) = 'generic',
+	@NumResults int = 10,
+	@bEnableMagicalItems bit = 1,
+	@UncommonChance int = 25,
+	@RareChance int = 15
+AS
+BEGIN
+	DECLARE @StagingTable TABLE(
+	--CREATE TABLE stagingtable (
+		itemid int,
+		name nvarchar(255),
+		worth nvarchar(255),
+		description nvarchar(255),
+		bmagical bit,
+		bfood bit,
+		bequipment bit,
+		btool bit,
+		bpotion bit,
+		btradegood bit,
+		rarity int,
+		rarityroll int
+	)
+
+	DECLARE @tick int = 1
+	WHILE (@tick <= @NumResults)
+	BEGIN
+		DECLARE @RandomRoll int = FLOOR(RAND()*(100-1)+1)
+
+		DECLARE @RolledRarity int = 0 -- defaults to common
+		IF @RandomRoll >= (100 - @UncommonChance - @RareChance) AND @RandomRoll < (100 - @RareChance) SET @RolledRarity = 1 -- uncommon
+		IF @RandomRoll >= (100 - @RareChance) SET @RolledRarity = 2 -- rare
+
+		INSERT INTO @StagingTable (
+			itemid, 
+			name,
+			worth,
+			description,
+			bmagical,
+			bfood,
+			bequipment,
+			btool,
+			bpotion,
+			btradegood,
+			rarity,
+			rarityroll
+		)
+		SELECT TOP 1 *, @RandomRoll as rarityroll
+		FROM Items
+		WHERE 
+			(
+				(@LootType = 'generic')
+				OR (@LootType = 'smithy' AND (bequipment = 1 OR btool = 1))
+				OR (@LootType = 'alchemist' AND bpotion = 1)
+				OR (@LootType = 'stockmerchant' AND (btool = 1 OR btradegood = 1))
+			)
+			AND (bmagical = 0 OR bmagical = CASE WHEN @bEnableMagicalItems = 1 THEN 1 ELSE 0 END)
+			AND  rarity = @RolledRarity
+		ORDER BY NEWID()
+		
+		SET @tick = @tick + 1
+	END
+
+	SELECT *
+	FROM @StagingTable
+
+
+	--DROP TABLE stagingtable
+END
