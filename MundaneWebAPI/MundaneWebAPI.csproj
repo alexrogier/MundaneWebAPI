@@ -115,10 +115,7 @@
     <Compile Include="Models\GetAllItems_Result.cs">
       <DependentUpon>MundaneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GetItemByID_Result.cs">
-      <DependentUpon>MundaneModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Items.cs">
+    <Compile Include="Models\Item.cs">
       <DependentUpon>MundaneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MundaneModel.Context.cs">

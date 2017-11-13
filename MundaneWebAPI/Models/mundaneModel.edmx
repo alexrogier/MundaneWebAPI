@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mundanedbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="mundanedbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="itemid" />
@@ -32,11 +32,12 @@
         <EntityContainer Name="mundanedbModelStoreContainer">
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mundanedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Items">
+        <EntityType Name="Item">
           <Key>
             <PropertyRef Name="itemid" />
           </Key>
@@ -53,7 +54,7 @@
           <Property Name="rarity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="mundanedbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Items" EntityType="Self.Items" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
           <FunctionImport Name="GenerateLoot" ReturnType="Collection(mundanedbModel.GenerateLoot_Result)">
             <Parameter Name="LootType" Mode="In" Type="String" />
             <Parameter Name="NumResults" Mode="In" Type="Int32" />
@@ -62,9 +63,6 @@
             <Parameter Name="RareChance" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAllItems" ReturnType="Collection(mundanedbModel.GetAllItems_Result)" />
-          <FunctionImport Name="GetItemByID" ReturnType="Collection(mundanedbModel.GetItemByID_Result)">
-            <Parameter Name="ItemID" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GenerateLoot_Result">
           <Property Type="Int32" Name="itemid" Nullable="true" />
@@ -78,21 +76,9 @@
           <Property Type="Boolean" Name="bpotion" Nullable="true" />
           <Property Type="Boolean" Name="btradegood" Nullable="true" />
           <Property Type="Int32" Name="rarity" Nullable="true" />
+          <Property Type="Int32" Name="rarityroll" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetAllItems_Result">
-          <Property Type="Int32" Name="itemid" Nullable="false" />
-          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="worth" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="description" Nullable="true" MaxLength="255" />
-          <Property Type="Boolean" Name="bmagical" Nullable="false" />
-          <Property Type="Boolean" Name="bfood" Nullable="false" />
-          <Property Type="Boolean" Name="bequipment" Nullable="false" />
-          <Property Type="Boolean" Name="btool" Nullable="false" />
-          <Property Type="Boolean" Name="bpotion" Nullable="false" />
-          <Property Type="Boolean" Name="btradegood" Nullable="false" />
-          <Property Type="Int32" Name="rarity" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="GetItemByID_Result">
           <Property Type="Int32" Name="itemid" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="worth" Nullable="false" MaxLength="255" />
@@ -112,7 +98,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="mundanedbModelStoreContainer" CdmEntityContainer="mundanedbEntities">
           <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="mundanedbModel.Items">
+            <EntityTypeMapping TypeName="mundanedbModel.Item">
               <MappingFragment StoreEntitySet="Items">
                 <ScalarProperty Name="itemid" ColumnName="itemid" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -142,6 +128,7 @@
                 <ScalarProperty Name="bpotion" ColumnName="bpotion" />
                 <ScalarProperty Name="btradegood" ColumnName="btradegood" />
                 <ScalarProperty Name="rarity" ColumnName="rarity" />
+                <ScalarProperty Name="rarityroll" ColumnName="rarityroll" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -176,7 +163,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

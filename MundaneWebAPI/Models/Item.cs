@@ -12,7 +12,7 @@ namespace MundaneWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Items
+    public partial class Item
     {
         public int itemid { get; set; }
         public string name { get; set; }

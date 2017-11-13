@@ -15,20 +15,20 @@ namespace MundaneWebAPI.Controllers
 
         [Route("api/mundane/GenerateLoot")]
         [HttpGet]
-        public IEnumerable<GenerateLoot_Result> GenerateLoot(string lootType, int numResults, bool bEnableMagicalItems, int rarityUncommon, int rarityRare)
+        public IEnumerable<GenerateLoot_Result> GenerateLoot(string lootType, int numResults, bool bEnableMagicalItem, int rarityUncommon, int rarityRare)
         {
-            return ctx.GenerateLoot(lootType, numResults, bEnableMagicalItems, rarityUncommon, rarityRare).ToList();
+            return ctx.GenerateLoot(lootType, numResults, bEnableMagicalItem, rarityUncommon, rarityRare).ToList();
         }
         [Route("api/mundane/GetAllItems")]
         [HttpGet]
-        public IEnumerable<GetAllItems_Result> GetAllItems()
+        public IEnumerable<GetAllItems_Result> GetAllItem()
         {
             return ctx.GetAllItems().ToList();
         }
         [Route("api/mundane/CreateItem")]
         [HttpPost]
         public bool CreateItem(string ItemData){
-            Items NewItem = JsonConvert.DeserializeObject<Items>(ItemData);
+            Item NewItem = JsonConvert.DeserializeObject<Item>(ItemData);
             ctx.Items.Add(NewItem);
             ctx.SaveChanges();
             return true;
@@ -47,8 +47,8 @@ namespace MundaneWebAPI.Controllers
         public bool ModifyItem(string ItemData)
         {
             // modify item by looking at ItemData.itemid and updating fields
-            Items NewData = JsonConvert.DeserializeObject<Items>(ItemData);
-            Items OldData = ctx.Items.FirstOrDefault(x => x.itemid == NewData.itemid);
+            Item NewData = JsonConvert.DeserializeObject<Item>(ItemData);
+            Item OldData = ctx.Items.FirstOrDefault(x => x.itemid == NewData.itemid);
             ctx.Entry(OldData).CurrentValues.SetValues(NewData);
             ctx.SaveChanges();
             return true;

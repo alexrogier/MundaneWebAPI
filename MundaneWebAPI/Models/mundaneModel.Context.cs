@@ -27,7 +27,7 @@ namespace MundaneWebAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Items> Items { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
     
         public virtual ObjectResult<GenerateLoot_Result> GenerateLoot(string lootType, Nullable<int> numResults, Nullable<bool> bEnableMagicalItems, Nullable<int> uncommonChance, Nullable<int> rareChance)
         {
@@ -57,15 +57,6 @@ namespace MundaneWebAPI.Models
         public virtual ObjectResult<GetAllItems_Result> GetAllItems()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItems_Result>("GetAllItems");
-        }
-    
-        public virtual ObjectResult<GetItemByID_Result> GetItemByID(Nullable<int> itemID)
-        {
-            var itemIDParameter = itemID.HasValue ?
-                new ObjectParameter("ItemID", itemID) :
-                new ObjectParameter("ItemID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetItemByID_Result>("GetItemByID", itemIDParameter);
         }
     }
 }
